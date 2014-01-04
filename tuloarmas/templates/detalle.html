@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block TITLE %}Detalle{% endblock %}
+       
+{% block MENU %}
+    <ul id="menu">
+        <li><span>Bienvenido {{user.username}}</span></li>
+        <li><a href="/productos/">Productos</a></li>
+        <li><a href="/logout/">Cerrar Sesión</a></li>
+    </ul> 
+{% endblock %}
+ 
+{% block BREADCRUMB %}
+    <p>Usted está en: <span> \Inicio\Productos\{{producto.nombre}} </span></p>
+{% endblock %}
+
+{% block CONTENT %}
+    <div id="detalle">
+        <h2>{{producto.nombre}}</h2>
+        <p>
+            {{producto.descripcion}}
+        </p>
+        <span>Precio: {{producto.precio}}</span>
+    </div><!-- #detalle -->
+
+
+    <div id="comentarios">
+        <h3>Comentarios</h3>
+
+        <div id="nuevo-comentario">
+            <form action="/productos/{{producto.id}}/comentario/nuevo/" method="post">
+                {% csrf_token %}
+                {% for field in comentario_form %}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" value="Login" name="submit" />
+            </form>
+        </div>
+
+        {% for comentario in comentarios %}
+            <div class="comentario">
+                <span>
+                <a href="#" class="profileName">{{comentario.user.username}}</a>
+                {{comentario.texto}}
+                </span>
+                <span class="date">{{comentario.creado}}</span>
+             </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="clear"></div>
+{% endblock %}

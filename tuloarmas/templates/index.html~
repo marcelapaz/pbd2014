@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block MENU3 %}{% endblock %}
+{% block TITLE %}TuLoArmas{% endblock %}
+{% block CONTENT %}
+    <div id="login">
+        <form action="/login/" method="post">
+            <h2>Iniciar Sesión</h2>
+            {% for field in login_form %}
+                {% csrf_token %}
+                {{field}}
+            {% endfor %}
+            <input type="submit" value="Login" name="submit" />
+        </form>
+    </div><!-- #login -->
+{% endblock %}
