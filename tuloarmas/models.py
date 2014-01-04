@@ -18,7 +18,7 @@ from django.contrib.auth.models import User
 #    texto = models.TextField()
 
     # Llaves foráneas
-#    user = models.ForeignKey(User)
+#    Usuario = models.ForeignKey(Usuario)
 #    producto = models.ForeignKey(Producto)
     
 #    def __unicode__(self):
@@ -33,18 +33,18 @@ class Auditoria(models.Model):
     nuevo_valor = models.TextField()
     operacion = models.CharField(max_length=255)
 
-#class Usuario (models.Model):
-#    id = models.AutoField('ID', primary_key=True) 
-#    tipo_usuario = models.CharField(max_length=1)
-#    nombre_usuario= models.CharField(max_length=100)
-#    apellido_usuario = models.CharField(max_length=100)
-#    correo_usuario =  models.EmailField()
-#    direccion_usuario = models.CharField(max_length=50)
-#    telefono = models.CharField(max_length=20)
-#    celular_usuario = models.CharField(max_length=20)
-#    rut_usuario = models.CharField(max_length=20)
-#    estado_usuario= models.CharField(max_length=20)
-#    fecha_ingreso = models.DateField()
+class Usuario (models.Model):
+    id = models.AutoField('ID', primary_key=True) 
+    tipo_usuario = models.CharField(max_length=1)
+    nombre_usuario= models.CharField(max_length=100)
+    apellido_usuario = models.CharField(max_length=100)
+    correo_usuario =  models.EmailField()
+    direccion_usuario = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=20)
+    celular_usuario = models.CharField(max_length=20)
+    rut_usuario = models.CharField(max_length=20)
+    estado_usuario= models.CharField(max_length=20)
+    fecha_ingreso = models.DateField()
 
 class Categoria(models.Model): 
     id = models.AutoField('ID', primary_key=True)
@@ -67,7 +67,7 @@ class Cotizacion(models.Model):
     id = models.AutoField('ID', primary_key=True) 
     fecha_cotizacion=models.DateField(auto_now_add=True)    
     #llaves foraneas    
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(Usuario)
     
     
 class Proveedor_material (models.Model):
@@ -76,13 +76,13 @@ class Proveedor_material (models.Model):
     visibilidad = models.CharField(max_length=255)
     codigo_proveedor_material = models.CharField(max_length=255)
     #llaves foraneas
-    user = models.ForeignKey(User)
+    Usuario = models.ForeignKey(Usuario)
     material = models.ForeignKey(Material)
 
 class Envio (models.Model):
     id = models.AutoField('ID', primary_key=True) 
     #llaves foraneas
-    user = models.ForeignKey(User)
+    Usuario = models.ForeignKey(Usuario)
     cotizacion = models.ForeignKey(Cotizacion)
     material= models.ForeignKey(Material)
 
@@ -110,13 +110,13 @@ class Tutorial(models.Model):
     descripcion_tutorial =  models.TextField()
     imagen_tutorial = models.ImageField(upload_to='/tmp')
     #llaves foraneas
-    user = models.ForeignKey(User)
+    Usuario = models.ForeignKey(Usuario)
     categoria = models.ForeignKey(Categoria)
 
 class Comentario (models.Model):
     cuerpo= models.TextField()
     #llaves foraneas
-    user = models.ForeignKey(User, unique=True)
+    Usuario = models.ForeignKey(Usuario, unique=True)
     tutorial = models.ForeignKey(Tutorial, unique=True)
 
 
@@ -126,7 +126,7 @@ class Notificacion (models.Model):
     usaurio_cambio=models.CharField(max_length=255)
     fecha_accion = models.DateField()
     #llaves foraneas
-    user = models.ForeignKey(User)
+    Usuario = models.ForeignKey(Usuario)
 
 class Proceso(models.Model):
     id =models.AutoField('ID', primary_key=True)
